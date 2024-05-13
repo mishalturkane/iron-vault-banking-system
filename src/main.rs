@@ -15,7 +15,7 @@ fn main() {
 
         if user_input == master_password {
             let data = user_data();
-            println!("Hello {}! Welcome to the Iron Vault Banking System", data.green());
+            println!("Hello {}\n Welcome to the Iron Vault Banking System", data.green());
             handle_options();
             break;
         } else {
@@ -43,7 +43,11 @@ fn user_data() -> String {
     println!("Please enter your password:");
     io::stdin().read_line(&mut password).expect("Failed to read line");
 
-    format!("Users Full_Name: {}, Users User_Name: {}, Users Password: {}", full_name.trim(), user_name.trim(), password.trim())
+    let  first_name = extract_first_name(full_name.clone());
+
+
+
+    format!("{first_name}\nfull_Name: {},\nuser_Name: {},\npassword: {}", full_name.trim(), user_name.trim(), password.trim())
 }
 fn extract_first_name(full_name: String) -> String {
     let parts: Vec<&str> = full_name.trim().split_whitespace().collect();
