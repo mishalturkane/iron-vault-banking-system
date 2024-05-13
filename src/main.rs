@@ -14,6 +14,8 @@ fn main() {
         let user_input: i32 = user_input.trim().parse().expect("Please enter a valid integer");
 
         if user_input == master_password {
+            let data = user_data();
+            println!("Hello {}! Welcome to the Iron Vault Banking System", data.green());
             handle_options();
             break;
         } else {
@@ -27,6 +29,30 @@ fn main() {
     }
 }
 
+fn user_data() -> String {
+    let mut full_name = String::new();
+    let mut user_name = String::new();
+    let mut password = String::new();
+
+    println!("Please enter your full name:");
+    io::stdin().read_line(&mut full_name).expect("Failed to read line");
+
+    println!("Please enter your username:");
+    io::stdin().read_line(&mut user_name).expect("Failed to read line");
+
+    println!("Please enter your password:");
+    io::stdin().read_line(&mut password).expect("Failed to read line");
+
+    format!("Users Full_Name: {}, Users User_Name: {}, Users Password: {}", full_name.trim(), user_name.trim(), password.trim())
+}
+fn extract_first_name(full_name: String) -> String {
+    let parts: Vec<&str> = full_name.trim().split_whitespace().collect();
+    if let Some(first_part) = parts.first() {
+        first_part.to_string()
+    } else {
+        full_name
+    }
+}
 fn handle_options() {
     let mut balance = 0.00;
 
